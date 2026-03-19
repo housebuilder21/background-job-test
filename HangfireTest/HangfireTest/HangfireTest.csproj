@@ -21,9 +21,4 @@
   <ItemGroup>
     <ProjectReference Include="..\ExampleService\ExampleServiceLibrary.csproj" />
   </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="Hangfire\" />
-  </ItemGroup>
 </Project>
