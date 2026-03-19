@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ExampleService/ExampleServiceLibrary.csproj" />
+  <Project Path="HangfireTest/HangfireTest.csproj" />
+</Solution>

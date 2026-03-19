@@ -1,0 +1,57 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<MudText Typo="Typo.h3" GutterBottom="true">Hello, world!</MudText>
+
+<MudPaper Elevation="3" Class="ma-6 pa-5">
+    <MudText Typo="Typo.h4">Hangfire Testing Page</MudText>
+    <MudText>This page shows off examples of the Hangfire library in use. See the code-behind of this page to view the whole picture</MudText>
+    <MudText>On page initialization, a sample job has been fired. Check the console to see the message.</MudText>
+
+    <MudDivider Class="my-4" />
+    <!-- Service Dependency Injection Test -->
+    <MudText Class="mb-2">Click here to test sending a message through the ExampleService.</MudText>
+    <MudButton OnClick="ScheduleDITest" Variant="Variant.Filled" Color="Color.Primary">
+        Enschedule Job
+    </MudButton>
+
+    <MudDivider Class="my-4" />
+    <!-- Custom Message + Timespan Test -->
+    <MudText Class="mb-2">Enter a message and select the time to schedule the job.</MudText>
+    <div>
+        <MudInputLabel>Message</MudInputLabel>
+        <MudTextField id="message" @bind-Value="_message" />
+    </div>
+    <div class="d-flex my-5 align-center gap-4">
+        <MudInputLabel>From</MudInputLabel>
+        <div>
+            <MudNumericField T="int" Min="0" @bind-Value="_spanNumber" Style="width: 50px;" />
+        </div>
+        <MudSelect T="TimeSpans" @bind-Value="_selectedTimeSpan" Style="width: 100px; flex: unset;">
+            @foreach (TimeSpans timeSpan in Enum.GetValues(typeof(TimeSpans)))
+            {
+                <MudSelectItem Value="timeSpan">@timeSpan.ToString()</MudSelectItem>
+            }
+        </MudSelect>
+    </div>
+    <MudButton OnClick="ScheduleInputTest" Variant="Variant.Filled" Color="Color.Primary">
+        Enschedule Job
+    </MudButton>
+    <MudButton OnClick="UpdateLastJob" Variant="Variant.Filled" Color="Color.Primary">
+        Update Last Job
+    </MudButton>
+
+    <MudDivider Class="my-4" />
+    <!-- Last Message ID -->
+    <MudText Typo="Typo.caption">
+        Last Job ID: @_lastJobId Status: @_lastJobStatus
+        <MudIconButton Icon="@Icons.Material.Filled.Refresh"
+                       Size="Size.Small"
+                       OnClick="RefreshStatus"/>
+    </MudText>
+
+    <!-- Hangfire Console Link -->
+    <MudText Class="mt-4">Head to the console to see all jobs: <MudLink Href="@HangfireConsoleLink" Target="_blank">@HangfireConsoleLink</MudLink></MudText>
+    <MudText Typo="Typo.caption">The console should only be visible through for the local host.</MudText>
+</MudPaper>
